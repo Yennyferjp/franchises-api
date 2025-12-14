@@ -22,4 +22,9 @@ public class ProductsController {
     public Flux<Product> getAll(){
         return productsService.getAllProducts();
     }
+
+    @DeleteMapping("api/products/{productId}")
+    public Mono<Void> deleteProduct(@PathVariable Long productId) {
+        return productsService.deleteProduct(productId);
+    }
 }
