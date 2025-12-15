@@ -22,7 +22,11 @@ public class Product {
 
     private String name;
 
+    private String description;
+
     private Integer stock;
+
+    private Integer sku;
 
     @Column("branch_id")
     private Long branchId;
