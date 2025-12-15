@@ -7,4 +7,5 @@ import reactor.core.publisher.Flux;
 public interface ProductsRepository extends ReactiveCrudRepository<Product, Long> {
 
     Flux<Product> findByBranchId(Long branchId);
+    Flux<Product> findByName(String name);
 }
