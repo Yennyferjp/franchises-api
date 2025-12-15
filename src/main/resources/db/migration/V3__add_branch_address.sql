@@ -1,0 +1,3 @@
+-- ...existing code...
+ALTER TABLE branch
+    ADD COLUMN IF NOT EXISTS address VARCHAR(255);
