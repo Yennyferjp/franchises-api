@@ -1,8 +1,10 @@
 package com.yennyfer.franchises_api.controller;
 
+import com.yennyfer.franchises_api.dto.UpdateBranchRequest;
 import com.yennyfer.franchises_api.model.Branch;
 import com.yennyfer.franchises_api.model.BranchAggregate;
 import com.yennyfer.franchises_api.service.BranchesService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -27,5 +29,19 @@ public class BranchesController {
     @GetMapping("/details")
     public Flux<BranchAggregate> getAllWithDetails() {
         return branchesService.getAllBranchesWithDetails();
+    }
+
+    @DeleteMapping("{branchId}")
+    public Mono<Void> deleteBranch(
+            @PathVariable Long branchId) {
+        return branchesService.deleteBranch(branchId);
+    }
+
+    @PatchMapping("/{branchId}")
+    public Mono<Branch> updateBranch(
+            @PathVariable Long branchId,
+            @Valid @RequestBody UpdateBranchRequest request) {
+        return branchesService.updateBranch(branchId, request);
+
     }
 }
