@@ -1,0 +1,11 @@
+target/
+# .mvn directory is required for Maven Wrapper
+.git
+.idea
+*.iml
+mvnw.cmd
+compose.yaml
+compose.prod.yaml
+HELP.md
+README.md
+
