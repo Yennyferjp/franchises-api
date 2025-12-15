@@ -1,8 +1,10 @@
 package com.yennyfer.franchises_api.controller;
 
+import com.yennyfer.franchises_api.dto.UpdateFranchiseRequest;
 import com.yennyfer.franchises_api.model.Franchise;
 import com.yennyfer.franchises_api.model.FranchiseAggregate;
 import com.yennyfer.franchises_api.service.FranchisesService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -27,5 +29,18 @@ public class FranchisesController {
     @GetMapping("/details")
     public Flux<FranchiseAggregate> getAllWithDetails() {
         return franchisesService.getFranchisesWithDetails();
+    }
+
+    @DeleteMapping("{franchiseId}")
+    public Mono<Void> deleteFranchise(
+            @PathVariable Long franchiseId) {
+        return franchisesService.deleteFranchise(franchiseId);
+    }
+
+    @PatchMapping("{franchiseId}")
+    public Mono<Franchise> updateFranchise(
+            @PathVariable Long franchiseId,
+            @Valid @RequestBody UpdateFranchiseRequest request) {
+        return franchisesService.updateFranchise(franchiseId, request);
     }
 }
