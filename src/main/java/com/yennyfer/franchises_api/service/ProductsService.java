@@ -1,5 +1,6 @@
 package com.yennyfer.franchises_api.service;
 
+import com.yennyfer.franchises_api.dto.ProductMaxStockResponse;
 import com.yennyfer.franchises_api.dto.UpdateProductRequest;
 import com.yennyfer.franchises_api.dto.UpdateProductStockRequest;
 import com.yennyfer.franchises_api.model.Product;
@@ -69,5 +70,9 @@ public class ProductsService {
             product.setSku(request.sku());
             return productsRepository.save(product);
         });
+    }
+
+    public Flux<ProductMaxStockResponse> getProductsWithMaxStockPerFranchise(Long franchiseId) {
+        return productsRepository.findProductsWithMaxStockPerFranchise(franchiseId);
     }
 }

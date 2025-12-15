@@ -1,9 +1,11 @@
 package com.yennyfer.franchises_api.controller;
 
+import com.yennyfer.franchises_api.dto.ProductMaxStockResponse;
 import com.yennyfer.franchises_api.dto.UpdateFranchiseRequest;
 import com.yennyfer.franchises_api.model.Franchise;
 import com.yennyfer.franchises_api.model.FranchiseAggregate;
 import com.yennyfer.franchises_api.service.FranchisesService;
+import com.yennyfer.franchises_api.service.ProductsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class FranchisesController {
     private final FranchisesService franchisesService;
+    private final ProductsService productService;
 
     @PostMapping
     public Mono<Franchise> create(@RequestBody Franchise franchise){
@@ -42,5 +45,11 @@ public class FranchisesController {
             @PathVariable Long franchiseId,
             @Valid @RequestBody UpdateFranchiseRequest request) {
         return franchisesService.updateFranchise(franchiseId, request);
+    }
+
+    @GetMapping("/{franchiseId}/products/max-stock")
+    public Flux<ProductMaxStockResponse> getProductsWithMaxStockPerFranchise(
+            @PathVariable Long franchiseId) {
+        return productService.getProductsWithMaxStockPerFranchise(franchiseId);
     }
 }
